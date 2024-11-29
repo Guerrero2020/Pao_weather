@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta el Clima</title>
+      <link rel="icon" type="image/descarga" href="{{ url_for('static', filename='images/climaG.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center titulo mb-4">☀️ Consulta el Clima</h1>
+        <div class="formulario bg-light shadow p-4 rounded">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="ciudad" class="form-label">Introduce el nombre de la ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad" class="form-control" placeholder="Ejemplo: Ambato" required>
+                </div>
+                <button type="submit" class="btn btn-warning btn-block">Consultar Clima</button>
+            </form>
+        </div>
+
+        {% if weather_data %}
+        <div class="resultado mt-5 p-4 bg-white shadow rounded">
+            {% if weather_data.error %}
+                <div class="alert alert-danger text-center">
+                    {{ weather_data.error }}
+                </div>
+            {% else %}
+                <h2 class="text-center text-primary">
+                    <img src="https://openweathermap.org/img/wn/{{ weather_data.icono }}@2x.png" alt="icono_clima">
+                    {{ weather_data.ciudad }}
+                </h2>
+                <ul class="list-group mt-3">
+                    <li class="list-group-item"><strong>Temperatura:</strong> {{ weather_data.temperatura }}°C</li>
+                    <li class="list-group-item"><strong>Descripción:</strong> {{ weather_data.descripcion }}</li>
+                    <li class="list-group-item"><strong>Latitud:</strong> {{ weather_data.latitud }}</li>
+                    <li class="list-group-item"><strong>Longitud:</strong> {{ weather_data.longitud }}</li>
+                </ul>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <footer class="bg-info text-center text-lg-start fixed-bottom">
+        <div class="text-center p-2" style="background-color:pink">
+            2024 Copyright:
+            <a href="cv.html" target="_blank">Paola Guerrero</a>
+</body>
+</html>
+
